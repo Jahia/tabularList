@@ -48,7 +48,7 @@
                             <c:otherwise>
                                 <c:set var="res" value="${renderContext.ajaxRequest and not empty renderContext.ajaxResource ? renderContext.ajaxResource.node.path : renderContext.mainResource.node.path}"/>
                                 <li>
-                                    <a onclick="jreplace('tabs${currentNode.name}', '<c:url value="${url.base}${currentNode.path}.html.ajax"/>',{displayTab:'${subList.name}',mainResource:'${res}.html'},null,true);"><span>${subList.displayableName}</span></a>
+                                    <a class="ajaxListTab" id="${status.index}_${subList.name}_${res}"><span>${subList.displayableName}</span></a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -56,6 +56,15 @@
                 </c:choose>
             </c:forEach>
         </ul>
+        <script type="text/javascript">
+            var tabs = document.getElementsByClassName("ajaxListTab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].addEventListener("click", function(e) {
+                    var split = e.currentTarget.id.split("_");
+                    jreplace('tabs${currentNode.name}', '<c:url value="${url.base}${currentNode.path}.html.ajax"/>',{displayTab:split[1],mainResource: split[2] + '.html'},null,true);
+                });
+            }
+        </script>
     </div>
     <c:if test="${not empty displayList}">
         <div class="tabContainer"><!--start tabContainer-->
