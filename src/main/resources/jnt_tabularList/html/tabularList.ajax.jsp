@@ -17,7 +17,7 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:addResources type="css" resources="tabularList.css"/>
-<template:addResources type="javascript" resources="jquery.min.js,ajaxreplace.js"/>
+<template:addResources type="javascript" resources="apps/tabularList.bundle.js"/>
 <c:set var="displayTab" value="${not empty renderContext.mainResource.moduleParams.displayTab ? renderContext.mainResource.moduleParams.displayTab : param.displayTab}"/>
 <div id="tabs${currentNode.name}">
     <div class="idTabsContainer"><!--start idTabsContainer-->
@@ -57,13 +57,7 @@
             </c:forEach>
         </ul>
         <script type="text/javascript">
-            var tabs = document.getElementsByClassName("ajaxListTab");
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].addEventListener("click", function(e) {
-                    var split = e.currentTarget.id.split("_");
-                    jreplace('tabs${currentNode.name}', '<c:url value="${url.base}${currentNode.path}.html.ajax"/>',{displayTab:split[1],mainResource: split[2] + '.html'},null,true);
-                });
-            }
+            TabularListLibrary.initTabulaList('tabs${currentNode.name}', '<c:url value="${url.base}${currentNode.path}.html.ajax"/>');
         </script>
     </div>
     <c:if test="${not empty displayList}">
