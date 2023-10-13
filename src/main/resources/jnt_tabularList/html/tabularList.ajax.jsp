@@ -17,7 +17,7 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:addResources type="css" resources="tabularList.css"/>
-<template:addResources type="javascript" resources="apps/tabularList.bundle.js"/>
+<template:addResources type="javascript" resources="apps/tabularList.shared.bundle.js,apps/tabularList.tabularListAjax.bundle.js"/>
 <c:set var="displayTab" value="${not empty renderContext.mainResource.moduleParams.displayTab ? renderContext.mainResource.moduleParams.displayTab : param.displayTab}"/>
 <div id="tabs${currentNode.name}">
     <div class="idTabsContainer"><!--start idTabsContainer-->
@@ -56,10 +56,10 @@
                 </c:choose>
             </c:forEach>
         </ul>
-        <script type="text/javascript">
-            TabularListLibrary.initTabulaList('tabs${currentNode.name}', '<c:url value="${url.base}${currentNode.path}.html.ajax"/>');
-        </script>
     </div>
+    <script type="application/javascript">
+        tabularListAjaxLib.initTabs("tabs${currentNode.name}", "<c:url value="${url.base}${currentNode.path}.html.ajax"/>");
+    </script>
     <c:if test="${not empty displayList}">
         <div class="tabContainer"><!--start tabContainer-->
             <template:list path="${displayList.path}"/>

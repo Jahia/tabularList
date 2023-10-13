@@ -12,7 +12,7 @@
 /**
  * This code has been modified by Jahia from its original source.
  */
-export function init($) {
+(function init($) {
     $.fn.identify = function(options) {
         var opts = $.extend(true, {}, $.fn.identify.defaults, options);
 
@@ -105,9 +105,9 @@ export function init($) {
         ,preventCache: true       // Try to prevent cache
         ,cacheVoidArg: 'void'     // Void argument passed to try to avoid cache
     }
-}
+})($);
 
-export function jreplace($, id, url, params, callback, replaceIdContent) {
+export function jreplace(id, url, params, callback, replaceIdContent) {
     $.get(url, params, function(data) {
         if (replaceIdContent != 'undefined' && replaceIdContent) {
             $("#" + id).replaceWith(data);
