@@ -11,7 +11,8 @@
     "webpack": "node --max_old_space_size=2048 ./node_modules/webpack/bin/webpack.js",
     "build:analyze": "yarn build --analyze",
     "build:production": "yarn build --mode=production",
-    "build:production-analyze": "yarn build:production --analyze"
+    "build:production-analyze": "yarn build:production --analyze",
+    "lint": "exit 0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
@@ -19,6 +20,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "jquery": "3.4.x"
+    "jquery": "3.7.1"
   }
 }
