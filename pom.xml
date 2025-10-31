@@ -64,7 +64,7 @@
     </scm>
 
     <properties>
-        <jahia-module-signature>MC0CFQCD+5QZwOJ2eYANYck/BZUxn7bw6AIUG/n8L15Wd2PSWTGRMlvDfBj9q0Y=</jahia-module-signature>
+        <jahia-module-signature>MCwCFBCo/n5ZHTnCHNcJbEGu4Nhby7WHAhQlfjLG5hbJBO8m7o+8EQ3RFOxGFQ==</jahia-module-signature>
         <yarn.arguments>build:production</yarn.arguments>
     </properties>
 
