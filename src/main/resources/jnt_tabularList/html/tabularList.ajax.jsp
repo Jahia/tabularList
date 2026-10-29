@@ -19,7 +19,7 @@
 <template:addResources type="css" resources="tabularList.css"/>
 <template:addResources type="javascript" resources="apps/tabularList.shared.bundle.js,apps/tabularList.tabularListAjax.bundle.js"/>
 <c:set var="displayTab" value="${not empty renderContext.mainResource.moduleParams.displayTab ? renderContext.mainResource.moduleParams.displayTab : param.displayTab}"/>
-<div id="tabs${currentNode.name}">
+<div id="tabs${fn:escapeXml(currentNode.name)}">
     <div class="idTabsContainer"><!--start idTabsContainer-->
 
         <ul class="idTabs">
@@ -41,14 +41,17 @@
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${renderContext.editMode}">
+                                <c:url var="tabUrl" value="${url.mainResource}">
+                                    <c:param name="displayTab" value="${subList.name}"/>
+                                </c:url>
                                 <li>
-                                    <a href="<c:url value='${url.mainResource}?displayTab=${subList.name}'/>"><span>${fn:escapeXml(subList.displayableName)}</span></a>
+                                    <a href="${fn:escapeXml(tabUrl)}"><span>${fn:escapeXml(subList.displayableName)}</span></a>
                                 </li>
                             </c:when>
                             <c:otherwise>
                                 <c:set var="res" value="${renderContext.ajaxRequest and not empty renderContext.ajaxResource ? renderContext.ajaxResource.node.path : renderContext.mainResource.node.path}"/>
                                 <li>
-                                    <a class="ajaxListTab" id="${status.index}_${subList.name}_${res}"><span>${subList.displayableName}</span></a>
+                                    <a class="ajaxListTab" id="${status.index}_${fn:escapeXml(subList.name)}_${fn:escapeXml(res)}"><span>${fn:escapeXml(subList.displayableName)}</span></a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -57,8 +60,9 @@
             </c:forEach>
         </ul>
     </div>
+    <c:url var="ajaxUrl" value="${url.base}${currentNode.path}.html.ajax"/>
     <script type="application/javascript">
-        tabularListAjaxLib.initTabs("tabs${currentNode.name}", "<c:url value="${url.base}${currentNode.path}.html.ajax"/>");
+        tabularListAjaxLib.initTabs("tabs${functions:escapeJavaScript(currentNode.name)}", "${functions:escapeJavaScript(ajaxUrl)}");
     </script>
     <c:if test="${not empty displayList}">
         <div class="tabContainer"><!--start tabContainer-->
