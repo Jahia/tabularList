@@ -27,7 +27,7 @@
 </c:forEach>
 </c:url>
 <c:set var="ps" value="&${fn:substringAfter(encodedUrl, '?')}"/>
-<div id="tabs${currentNode.name}">
+<div id="tabs${fn:escapeXml(currentNode.name)}">
     <div class="idTabsContainer"><!--start idTabsContainer-->
         <ul class="idTabs">
             <c:forEach items="${jcr:getChildrenOfType(currentNode, jcr:getConstraints(currentNode))}" var="subList" varStatus="status">
