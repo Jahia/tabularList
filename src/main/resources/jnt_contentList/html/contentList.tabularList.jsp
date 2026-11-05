@@ -21,4 +21,7 @@
 <c:if test="${(empty currentResource.moduleParams.displayTab and currentResource.moduleParams.stat) or (currentResource.moduleParams.displayTab eq currentNode.name)}">
     <c:set var="tabCssClass" value=' class="selected"'/>
 </c:if>
-<li><a href="<c:url value='${url.mainResource}?displayTab=${currentNode.name}${currentResource.moduleParams.ps}'/>"${tabCssClass}><span>${fn:escapeXml(currentNode.displayableName)}</span></a></li>
+<c:url var="tabUrl" value="${url.mainResource}">
+    <c:param name="displayTab" value="${currentNode.name}"/>
+</c:url>
+<li><a href="${fn:escapeXml(tabUrl)}${fn:escapeXml(currentResource.moduleParams.ps)}"${tabCssClass}><span>${fn:escapeXml(currentNode.displayableName)}</span></a></li>
